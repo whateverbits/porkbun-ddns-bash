@@ -40,7 +40,7 @@ declare -l DOMAIN="example.com"
 declare -l SUBDOMAIN=""
 ```
 
-### RECORD
+### Record
 IP version and Time-To-Live values can be modified to suit your application. By default, the script will use IPv4 (A), and 6 minutes TTL (360).
 
 ### Example
@@ -68,6 +68,9 @@ Setup a CronJob to keep the DNS record accurate. Use `crontab -e` to add job.
 ```bash
 */10 * * * * /path/to/porkbun-ddns.sh
 ```
+
+## Issues
+Open new issues in the [GitLab Issue Tracker](https://gitlab.com/whateverbits/porkbun-ddns-bash/-/issues).
 
 ## License
 Porkbun DDNS Bash is distributed under the [ISC License](https://gitlab.com/whateverbits/porkbun-ddns-bash/-/blob/main/LICENSE).
