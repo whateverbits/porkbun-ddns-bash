@@ -41,7 +41,7 @@ declare -l SUBDOMAIN=""
 ```
 
 ### Record
-IP version and Time-To-Live values can be modified to suit your application. By default, the script will use IPv4 (A), and 6 minutes TTL (360).
+IP version and Time-To-Live values can be modified to suit your application. By default, the script will use IPv4 (A), and 10 minutes TTL (600). Porkbun does not allow TTL values lower than 600.
 
 ### Example
 
@@ -58,14 +58,15 @@ declare -l DOMAIN="example.com"
 declare -l SUBDOMAIN=""
 # Record - "A" || "AAAA"
 declare -u RECORD="A"
-# Record TTL - "360" || "600"
-declare -i RECORDTTL="360"
+# Record TTL - "600"
+declare -i RECORDTTL="600"
 ```
 
 ## Cronjob
 Setup a CronJob to keep the DNS record accurate. Use `crontab -e` to add job.
 
 ```bash
+# Every 10 minutes
 */10 * * * * /path/to/porkbun-ddns.sh
 ```
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-# Porkbun DDNS
+# Porkbun DDNS Bash
 
 # Configuration
 # =============
@@ -13,8 +13,8 @@ declare -l DOMAIN=""
 declare -l SUBDOMAIN=""
 # Record - "A" || "AAAA"
 declare -u RECORD="A"
-# Record TTL - "360" || "600"
-declare -i RECORDTTL="360"
+# Record TTL - "600"
+declare -i RECORDTTL="600"
 # cURL
 declare CURL=$(which curl)
 
