@@ -1,6 +1,5 @@
 # Porkbun DDNS Bash
-
-Porkbun Dynamic DNS bash script for keeping DNS record up-to-date with system IP address. Supports IPv4 or IPv6, only modifies the record if necessary, and creates the record if it does not exist.
+Porkbun Dynamic DNS Bash script for keeping a DNS record up-to-date with the system IP address. Supports IPv4 and/or IPv6, only modifies the record if necessary, and does not modify any record configurations besides IP address. Record must already exist on Porkbun for script to function.
 
 ## Configure
 Open the `porkbun-ddns.sh` file in your editor of choice to modify the configuration options.
@@ -8,14 +7,12 @@ Open the `porkbun-ddns.sh` file in your editor of choice to modify the configura
 ### API Key
 A Porkbun API key is required for the script to function.
 
-#### Enable API Access
-Enable `API ACCESS` for your domain of choice.
+Enable `API ACCESS` for your domain.
 
-+ Navigate to the Porkbun [Domain Management](https://porkbun.com/account/domainsSpeedy) panel.
++ Navigate to the [Porkbun Domain Management](https://porkbun.com/account/domainsSpeedy) panel.
 + Next to your domain, select `Details` to expand domain settings.
 + Enable the `API ACCESS` radio toggle.
 
-#### Generate API Key
 Generate a new API key to use in the script.
 
 + Navigate to the Porkbun [API Access](https://porkbun.com/account/api) panel.
@@ -31,39 +28,40 @@ declare APIKEYSECRET="sk1_generated_secret_key"
 The root domain or a subdomain can be used for the dynamic DNS record. To use the root domain, leave the `SUBDOMAIN` variable empty.
 
 ```bash
-# Set ddns.example.com to system IP
 declare -l DOMAIN="example.com"
 declare -l SUBDOMAIN="ddns"
-
-# Set example.com to system IP
-declare -l DOMAIN="example.com"
-declare -l SUBDOMAIN=""
 ```
 
-### Record
-IP version and Time-To-Live values can be modified to suit your application. By default, the script will use IPv4 (A), and 10 minutes TTL (600). Porkbun does not allow TTL values lower than 600.
+### Records
+Toggle A (IPv4) and/or AAAA (IPv6) record updates.
+
+```bash
+declare -l A_RECORD="true"
+declare -l AAAA_RECORD="false"
+```
 
 ### Example
 
 ```bash
 # Configuration
 # =============
-# API Key - "pk1_ex"
+# Porkbun API Key
 declare APIKEY="pk1_generated_api_key"
-# Secret API Key - "sk1_ex"
+# Porkbun API Key Secret
 declare APIKEYSECRET="sk1_generated_secret_key"
-# Domain - "example.com"
+# Domain: "example.com"
 declare -l DOMAIN="example.com"
-# Subdomain - "" || "www" || "*"
-declare -l SUBDOMAIN=""
-# Record - "A" || "AAAA"
-declare -u RECORD="A"
-# Record TTL - "600"
-declare -i RECORDTTL="600"
+# Subdomain: "" || "www"
+declare -l SUBDOMAIN="ddns"
+# IPv4 A Record: "true" || "false"
+declare -l A_RECORD="true"
+# IPv6 AAAA Record: "true" || "false"
+declare -l AAAA_RECORD="false"
 ```
 
 ## Cronjob
 Setup a CronJob to keep the DNS record accurate. Use `crontab -e` to add job.
+Verify the `porkbun-ddns.sh` file has execute permissions: `chmod 750 porkbun-ddns.sh`.
 
 ```bash
 # Every 10 minutes
